@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=1">
+    <title>Unity WebGL Player | UNetManager</title>
+    <link rel="shortcut icon" href="TemplateData/favicon.ico">
+    <link rel="stylesheet" href="TemplateData/style.css">
+	<style>
+
+	/******************************************/
+	
+	
+	html,body {
+		width : 100%;
+		height: 100%;
+		margin : 0px;
+		padding : 0px;
+		overflow-x: hidden;
+		font-size: 100%;
+	}
+	
+	h1 {
+	  font-family: Helvetica;
+		font-size: 3.0vw;
+		font-weight: bold;
+		color: #fff;
+		height: 50px;
+	}
+	
+	h2 {
+		font-family: Helvetica;
+		font-size: 1.5vw;
+		font-weight: 400;
+	}
+	
+
+	.section,
+	.container,
+	.button {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+
+	.section {
+		position: relative;
+		height: 400px;
+		width: 100vw;
+	}
+	
+	.fishType {
+		position: relative;
+		height: 75vh;
+		width: 100vw;
+		margin: 0;
+		background: #23b3f6;
+		display: flex;
+		justify-content: center;
+		
+	}
+	
+	.facingRight {
+		position: relative;
+		height: 40vh;
+		width: 100vw;
+		margin: 0;
+		background: #85d5fa;
+		display: flex;
+		justify-content: center;
+	}
+	
+	.feedingBehaviour {
+		position: relative;
+		height: 40vh;
+		width: 100vw;
+		margin: 0;
+		background: #0999dc;
+		display: flex;
+		justify-content: center;
+	}
+	
+	.socialBehaviour {
+		position: relative;
+		height: 110vh;
+		width: 100vw;
+		margin: 0;
+		background: #0777ab;
+		display: flex;
+		justify-content: center;
+	}
+	
+	.webgl-content {
+		position: absolute;
+		top: 65vh;
+		width: 60vw;
+		height: 60vh;
+	}
+
+	.container {
+		position: absolute;
+		margin: 0;
+		top: 70%;
+		left: 40%;
+		width: 25vw
+	}
+	
+	.imgcontainer {
+		position: absolute;
+		height: 15vh;
+		width: 35vw;
+		margin: 0;
+		top: 40%;
+		text-align:center;
+	}
+	
+	.pelContainer {
+		position: absolute;
+		height: 20vh;
+		width: 20vw;
+		margin: 0;
+		top: 40%;
+		right: 12.5%;	
+		text-align:center;
+	}
+	
+	.demContainer {
+		position: absolute;
+		height: 20vh;
+		width: 20vw;
+		margin: 0;
+		top: 40%;
+		left: 12.5%;
+		text-align:center;
+	}
+	
+	.carnContainer {
+		position: absolute;
+		height: 25%;
+		width: 20vw;
+		top: 20vh;
+		left: 15vw;
+		text-align:center;
+	}
+	
+	.herbContainer {
+		position: absolute;
+		height: 25%;
+		width: 20vw;
+		top: 20vh;
+		left: 40vw;
+		text-align:center;
+	}
+	
+	.omniContainer{
+		position: absolute;
+		height: 25%;
+		width: 20vw;
+		top: 50%;
+		right: 15vw;
+		text-align:center;
+	}
+	
+	.pelExamples {
+		position: absolute;
+		height: 10vh;
+		width: 50%;
+		margin: 0;
+		top: 70%;
+		right: 0%;	
+		text-align:center;
+	}
+	
+	.demExamples {
+		position: absolute;
+		height: 10vh;
+		width: 50%;
+		margin: 0;
+		top: 70%;
+		left: 0%;	
+		text-align:center;
+	}
+	
+	.button {
+		align-items: center;
+		position: absolute;
+		background-color: #FFC107;
+		height: 5vh;
+		width: 15vw;
+		border-radius: 25px;
+		margin: 0;
+		cursor: pointer;
+		-webkit-user-select: none;
+		-moz-user-select: none;
+		user-select: none;
+	}
+	
+	.leftButton {
+		left: 10%;
+		top: 50%;
+	}
+	
+	.rightButton {
+		right: 10%;	
+		top: 50%;
+	}
+	
+	.solButton {
+		left: 25%;
+		top: 20%;
+	}
+	
+	.socButton {
+		right: 25%;
+		top: 20%;
+	}
+	
+	
+	.demButton {
+		left: 10%;
+		top: -50%;
+	}
+	
+	.pelButton {
+		right: 10%;
+		top: -50%;
+	}
+	
+	.carnButton {
+		left: 12.5%;
+		top: -50%;
+	}
+	
+	.herbButton {
+		left: 12.5%;
+		top: -50%;
+	}
+	
+	.omniButton {
+		right: 12.5%;	
+		top: -50%;
+	}
+	
+	.s-header,
+	.s-three {
+		background: #B3E5FC;
+		width: 100vw;
+		height: 35vh;
+		align-items: middle;
+	}
+
+	.s-one,
+	.s-four {
+		align-items: center;
+		
+	}
+
+	.s-two,
+	.s-five {
+		background: #0288D1;
+	}
+
+	.c-header {
+		text-align: center;
+		color: #fff;
+	}
+
+	.b-one,
+	.b-two,
+	.b-three,
+	.b-four,
+	.b-five {
+		color: #fff;
+	}
+
+	.b-two {
+		-webkit-transform-origin: 100% 100%;
+		transform-origin: 100% 100%;
+	}
+
+	.glow {
+		box-shadow: #d5a310 0 0 10px 10px;
+	}
+	
+	input[type="file"] {
+		font-size: 1vw;
+	}
+	
+	.img1,
+	.img2,
+	.img3 {
+		width: 15vw;
+	}
+	
+	</style>
+  </head>
+  <body>
+	<div>
+		
+		<div class="section s-header">
+			<h1>Submete o teu desenho: </h1>
+			<form id="imgur" >
+			<div class="container">
+				<input type="file" class="imgur" style="" accept="image/*" data-max-size="5000"/>
+			</div>
+			</form>
+			
+		</div>
+		
+		
+		<script type="module">		
+		
+		import * as Magick from 'https://knicknic.github.io/wasm-imagemagick/magickApi.js';
+		
+		
+		var obj = { bottomFeeder: true, facingRight: true, isCarnivore: true, isHerbivore: false, social: false, url: "" };
+		var changed = false;
+		
+		function blobToUint8Array(blob) {
+				return new Promise(resolve => {
+					const fileReader = new FileReader();
+					fileReader.onload = event => {
+						const result = event.target.result;
+						resolve(new Uint8Array(result));
+					};
+					fileReader.readAsArrayBuffer(blob);
+				});
+		}
+			
+		$("document").ready(function() {
+
+		  $('input[type=file]').one("change", function() {
+			changed = true;
+
+			var $files = $(this).get(0).files;
+
+			
+			let DoMagickCall = async function () {
+							
+				let sourceBytes = await blobToUint8Array($files[0]);
+				console.log(sourceBytes);
+
+				let outputFile = await Magick.Call([{ 'name': 'srcFile.png', 'content': sourceBytes}], ["convert", 'srcFile.png', "-fuzz", "25%", "-transparent", "#ffffff", "-trim", "+repage", "out.png"]);
+				
+				console.log(outputFile[0]);
+				console.log($files[0]);
+				
+				if ($files.length) {
+
+				// Reject big files
+				if ($files[0].size > $(this).data("max-size") * 1024) {
+					console.log("Please select a smaller file");
+					return false;
+				}
+			  
+			  
+			 
+			  // Begin file upload
+			  console.log("Uploading file to Imgur..");
+
+			  var formData = new FormData();
+			  //formData.append("image", $files[0]);
+			  formData.append("image", outputFile[0].blob, "out.png");
+			  
+			  var settings = {
+				  "url": "https://api.imgur.com/3/image",
+				  "method": "POST",
+				  "timeout": 0,
+				  "headers": {
+					"Authorization": "Client-ID ebc2d20fe8ec7bc"
+				  },
+				  "processData": false,
+				  "mimeType": "multipart/form-data",
+				  "contentType": false,
+				  "data": formData
+			  };
+
+			  // Response contains stringified JSON
+			  // Image URL available at response.data.link
+			  $.ajax(settings).done(function(response) {
+				//obj = JSON.parse(''+response);
+				//console.log(obj.data.link);
+				//gameInstance.SendMessage("Manager","ReadURL", obj.data.link);
+				var resp = JSON.parse(''+response);
+				obj.url += resp.data.link;
+				console.log(obj);
+				//gameInstance.SendMessage("Manager","ReadURL",JSON.stringify(obj));
+				var element = document.getElementById("orient");
+				var img = document.createElement("img");
+				img.src = obj.url;
+				img.width = 200;
+				
+				element.append(img);
+			  });
+
+			}
+			}
+			DoMagickCall();
+			
+
+			/*if ($files.length) {
+
+			  // Reject big files
+			  if ($files[0].size > $(this).data("max-size") * 1024) {
+				console.log("Please select a smaller file");
+				return false;
+			  }
+			  
+			  
+			 
+			  // Begin file upload
+			  console.log("Uploading file to Imgur..");
+
+			  var formData = new FormData();
+			  //formData.append("image", $files[0]);
+			  formData.append("image", outputFile);
+			  
+			  var settings = {
+				  "url": "https://api.imgur.com/3/image",
+				  "method": "POST",
+				  "timeout": 0,
+				  "headers": {
+					"Authorization": "Client-ID ebc2d20fe8ec7bc"
+				  },
+				  "processData": false,
+				  "mimeType": "multipart/form-data",
+				  "contentType": false,
+				  "data": formData
+			  };
+
+			  // Response contains stringified JSON
+			  // Image URL available at response.data.link
+			  $.ajax(settings).done(function(response) {
+				//obj = JSON.parse(''+response);
+				//console.log(obj.data.link);
+				//gameInstance.SendMessage("Manager","ReadURL", obj.data.link);
+				var resp = JSON.parse(''+response);
+				obj.url += resp.data.link;
+				console.log(obj);
+				//gameInstance.SendMessage("Manager","ReadURL",JSON.stringify(obj));
+				var element = document.getElementById("orient");
+				var img = document.createElement("img");
+				img.src = obj.url;
+				img.width = 200;
+				
+				element.append(img);
+			  });
+
+			} */
+		  }); 
+		});
+		
+		window.buttonChange = function buttonChange(id) {
+			if (id == 'leftB'){
+				document.getElementById("rightB").style.backgroundColor = "#FFC107";
+				document.getElementById("leftB").style.backgroundColor = "green";
+				obj.facingRight = false;
+			}
+			else if (id == "rightB") {
+				document.getElementById("leftB").style.backgroundColor = "#FFC107";
+				document.getElementById("rightB").style.backgroundColor = "green";
+				obj.facingRight = true;
+			}
+			else if (id == "demersal") {
+				document.getElementById("pelagic").style.backgroundColor = "#FFC107";
+				document.getElementById("demersal").style.backgroundColor = "green";
+				obj.bottomFeeder = true;
+			}
+			
+			else if (id == "pelagic") {
+				document.getElementById("demersal").style.backgroundColor = "#FFC107";
+				document.getElementById("pelagic").style.backgroundColor = "green";
+				obj.bottomFeeder = false;
+			}
+			
+			else if (id == "carn") {
+				document.getElementById("herb").style.backgroundColor = "#FFC107";
+				document.getElementById("omni").style.backgroundColor = "#FFC107";
+				document.getElementById("carn").style.backgroundColor = "green";
+				obj.isCarnivore = true;
+				obj.isHerbivore = false;
+			}
+			
+			else if (id == "herb") {
+				document.getElementById("carn").style.backgroundColor = "#FFC107";
+				document.getElementById("omni").style.backgroundColor = "#FFC107";
+				document.getElementById("herb").style.backgroundColor = "green";
+				obj.isCarnivore = false;
+				obj.isHerbivore = true;
+			}
+			
+			else if (id == "omni") {
+				document.getElementById("herb").style.backgroundColor = "#FFC107";
+				document.getElementById("carn").style.backgroundColor = "#FFC107";
+				document.getElementById("omni").style.backgroundColor = "green";
+				obj.isCarnivore = true;
+				obj.isHerbivore = true;
+			}
+			
+			else if (id == "social") {
+				document.getElementById("notSocial").style.backgroundColor = "#FFC107";
+				document.getElementById("social").style.backgroundColor = "green";
+				obj.social = true;
+			}
+			
+			else if (id == "notSocial") {
+				document.getElementById("social").style.backgroundColor = "#FFC107";
+				document.getElementById("notSocial").style.backgroundColor = "green";
+				obj.social = false;
+			}
+			
+			if (changed == true && (document.getElementById("leftB").style.backgroundColor == "green" || document.getElementById("rightB").style.backgroundColor == "green") && 
+				(document.getElementById("demersal").style.backgroundColor == "green" || document.getElementById("pelagic").style.backgroundColor == "green") && 
+				(document.getElementById("carn").style.backgroundColor == "green" || document.getElementById("herb").style.backgroundColor == "green" || document.getElementById("omni").style.backgroundColor == "green") &&
+				(document.getElementById("social").style.backgroundColor == "green" || document.getElementById("notSocial").style.backgroundColor == "green")) {
+				console.log(obj);
+				
+				var storageRef = firebase.storage().ref();
+				var url = obj.url;
+				var blob = new Blob([JSON.stringify(obj, null, 2)], {type : 'application/json'});
+				var uploadTask = storageRef.child(url.substring(20,27)).put(blob);    
+								
+				gameInstance.SendMessage("Launcher","ReadURL",JSON.stringify(obj)); 	
+			}
+		}
+		</script>
+		
+		
+		<div class="facingRight">
+		<h1> Para que lado está virado?</h1>
+			<div class="imgcontainer" id="orient"></div>
+			<span class="button b-one leftButton" onclick="buttonChange('leftB')" id="leftB">
+				<h2>&#9668; Esquerdo</h2>
+			</span>
+			<span class="button b-one rightButton" onclick="buttonChange('rightB')" id="rightB">
+				<h2>Direito &#9658; </h2>
+			</span>
+		</div>
+		
+		<div class="fishType">
+		<h1>Quanto à zona em que vive, é:</h1>
+		
+			<div class="pelContainer">
+					<span class="button b-one pelButton" onclick="buttonChange('pelagic')" id="pelagic">
+					<h2>Pelágico</h2>
+					</span>
+					<h2>Vive na zona entre a superfície e o fundo do mar.</h2>
+					<h2>É ágil e nada longas distâncias.</h2>
+			</div>
+			<div class="pelExamples">
+			<img class="img1" src="https://i.imgur.com/0K3XKeu.jpg"></img>
+			<img class="img2" src="https://i.imgur.com/mtTO3oM.jpg"></img>
+			<img class="img3" src="https://i.imgur.com/EOo6fX9.jpg"></img>
+			</div>
+			<div class="demContainer">
+					<span class="button b-one demButton" onclick="buttonChange('demersal')" id="demersal">
+					<h2>Demersal</h2>
+					</span>
+					<h2>Vive a maior parte do tempo no fundo do mar.</h2>
+					<h2>Faz emboscadas ou camufla-se para caçar.</h2>				
+			</div>
+			<div class="demExamples">
+			<img class="img1" src="https://i.imgur.com/8Quuuo5.jpg"></img>
+			<img class="img2" src="https://i.imgur.com/idoH8L6.jpg"></img>
+			<img class="img3" src="https://i.imgur.com/Wi8S9uA.png"></img>
+			
+			</div>
+		</div>
+
+		
+		<div class="feedingBehaviour">
+		<h1>Quanto ao que come, é:</h1>
+			<div class="herbContainer">
+				<span class="button b-one herbButton" onclick="buttonChange('herb')" id="herb">
+				<h2>Herbívoro</h2>
+				</span>
+				<h2>(Só come plantas)</h2>
+			</div>
+			<div class="carnContainer">
+				<span class="button b-one carnButton" onclick="buttonChange('carn')" id="carn">
+				<h2>Carnívoro</h2>
+				</span>
+				<h2>(Só come carne)</h2>
+			</div>
+			<div class="omniContainer">
+				<span class="button b-one omniButton" onclick="buttonChange('omni')" id="omni">
+				<h2>Omnívoro</h2>
+				</span>
+				<h2>(Come plantas e carne)</h2>
+			</div>		
+		</div>
+		
+		<div class="socialBehaviour">
+		<h1>Em termos sociais, é:</h1>
+			<div class="button b-one socButton" onclick="buttonChange('social')" id="social">
+				<h2>Social</h2>
+			</div>
+			
+			<div class="button b-one solButton" onclick="buttonChange('notSocial')" id="notSocial">
+				<h2>Solitário</h2>
+			</div>
+			
+			<div class="webgl-content">
+				<div id="gameContainer" style="width: 100%; height: 100%"></div>
+				<div class="footer">
+					<div class="fullscreen" onclick="gameInstance.SetFullscreen(1)"></div>
+				</div>
+			</div>
+		</div>
+	
+		</div>
+		
+	<!-- The core Firebase JS SDK is always required and must be listed first -->
+	<script src="https://www.gstatic.com/firebasejs/7.1.0/firebase-app.js"></script>
+
+	<!-- TODO: Add SDKs for Firebase products that you want to use
+		 https://firebase.google.com/docs/web/setup#available-libraries -->
+	<script src="https://www.gstatic.com/firebasejs/5.7.0/firebase-storage.js"></script>
+
+	<script>
+	  // Your web app's Firebase configuration
+	  var firebaseConfig = {
+		apiKey: "AIzaSyBiwOcFGw663nOiJGESNas1LlDUVKtQ4xw",
+		authDomain: "aquarium-7c9d4.firebaseapp.com",
+		databaseURL: "https://aquarium-7c9d4.firebaseio.com",
+		projectId: "aquarium-7c9d4",
+		storageBucket: "gs://aquarium-7c9d4.appspot.com/",
+		messagingSenderId: "165560843071",
+		appId: "1:165560843071:web:a5082ce28083b38872f18a"
+	  };
+	  // Initialize Firebase
+	  firebase.initializeApp(firebaseConfig);
+	</script>
+  </body>
+  <script src="TemplateData/UnityProgress.js"></script>  
+    <script src="Build/UnityLoader.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+      var gameInstance = UnityLoader.instantiate("gameContainer", "Build/Builds.json", {onProgress: UnityProgress});
+    </script>
+</html>
